@@ -6,7 +6,7 @@ See the [User Manual](https://prestodb.io/docs/current/) for deployment instruct
 
 ## Requirements
 
-* Mac OS X or Linux
+* Mac OS X or Linux, don't support Windows.
 * Java 8 Update 92 or higher (8u92+), 64-bit
 * Maven 3.3.9+ (for building)
 * Python 2.4+ (for running with the launcher script)
@@ -15,6 +15,8 @@ See the [User Manual](https://prestodb.io/docs/current/) for deployment instruct
 
 Presto is a standard Maven project. Simply run the following command from the project root directory:
 
+    mvn -N io.takari:maven:wrapper -Dmaven=3.5.0
+    mvn install:install-file -Dfile=lib/ojdbc14-10.2.0.4.0.jar -DgroupId=com.oracle -DartifactId=ojdbc14 -Dversion=10.2.0.4.0 -Dpackaging=jar
     ./mvnw clean install
 
 On the first build, Maven will download all the dependencies from the internet and cache them in the local repository (`~/.m2/repository`), which can take a considerable amount of time. Subsequent builds will be faster.
@@ -22,6 +24,8 @@ On the first build, Maven will download all the dependencies from the internet a
 Presto has a comprehensive set of unit tests that can take several minutes to run. You can disable the tests when building:
 
     ./mvnw clean install -DskipTests
+    OR
+    ./mvnw clean package -DskipTests
 
 ## Running Presto in your IDE
 
