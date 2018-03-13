@@ -13,33 +13,13 @@
  */
 package com.facebook.presto.plugin.oracle;
 
-import com.facebook.presto.spi.Plugin;
-import com.facebook.presto.spi.connector.ConnectorFactory;
-import com.google.common.collect.ImmutableList;
-import com.google.inject.Module;
-
-import static com.google.common.base.MoreObjects.firstNonNull;
+import com.facebook.presto.plugin.jdbc.JdbcPlugin;
 
 public class OraclePlugin
-        implements Plugin
+        extends JdbcPlugin
 {
-    private final String name;
-    private final Module module;
-
     public OraclePlugin()
     {
-        this.name = "oracle";
-        this.module = new OracleClientModule();
-    }
-
-    @Override
-    public Iterable<ConnectorFactory> getConnectorFactories()
-    {
-        return ImmutableList.of(new OracleConnectorFactory(name, module, getClassLoader()));
-    }
-
-    private static ClassLoader getClassLoader()
-    {
-        return firstNonNull(Thread.currentThread().getContextClassLoader(), OraclePlugin.class.getClassLoader());
+        super("oracle", new OracleClientModule());
     }
 }
