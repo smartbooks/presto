@@ -66,6 +66,14 @@
         <air.javadoc.lint>-missing</air.javadoc.lint>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>aliyun</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+
+
     <modules>
         <module>presto-atop</module>
         <module>presto-spi</module>
